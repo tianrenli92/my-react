@@ -2,24 +2,27 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+class Course {
+    constructor(college, dept, number) {
+        this.college = college;
+        this.dept = dept;
+        this.number = number;
+    }
+}
+
 function App() {
+    let x = 1;
+    let courses = [
+        new Course('CAS', 'CS', '111'),
+        new Course('CFA', 'MP', '113'),
+        new Course('GRS', 'CS', '651'),
+    ];
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <ol>
+            {
+                courses.map(course => <li>{course.college} {course.dept} {course.number}</li>)
+            }
+        </ol>
     );
 }
 
