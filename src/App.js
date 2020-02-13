@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
 class Course {
@@ -10,20 +9,21 @@ class Course {
     }
 }
 
-function App() {
-    let x = 1;
-    let courses = [
-        new Course('CAS', 'CS', '111'),
-        new Course('CFA', 'MP', '113'),
-        new Course('GRS', 'CS', '651'),
-    ];
-    return (
-        <ol>
-            {
-                courses.map(course => <li>{course.college} {course.dept} {course.number}</li>)
-            }
-        </ol>
-    );
+class App extends Component {
+    render() {
+        let courses = [
+            new Course('CAS', 'CS', '111'),
+            new Course('CFA', 'MP', '113'),
+            new Course('GRS', 'CS', '651'),
+        ];
+        return (
+            <ol>
+                {
+                    courses.map(course => <li>{course.college} {course.dept} {course.number}</li>)
+                }
+            </ol>
+        );
+    }
 }
 
 export default App;
