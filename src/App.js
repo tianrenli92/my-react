@@ -21,7 +21,7 @@ class App extends Component {
             'Number',
             'Section',
             'Professor',
-        ]
+        ];
 
         const courses = [
             new Course('CAS', 'CS', '112', 'B1', 'Sullivan'),
@@ -45,7 +45,7 @@ class App extends Component {
 
     addNew2 = () => {
         this.addNew();
-    }
+    };
 
     delete(key) {
         let {courses} = this.state;
@@ -84,7 +84,7 @@ class App extends Component {
                 </table>
                 <button onClick={this.addNew2}>Add new course</button>
             </div>
-        ); // <tr>..</tr>, <tr>..</tr>, <tr>..</tr>, ..
+        );
     }
 }
 
