@@ -6,6 +6,7 @@ class Course {
         this.college = college;
         this.dept = dept;
         this.number = number;
+        this.key = `${this.college} ${this.dept} ${this.number}`;
     }
 }
 
@@ -16,10 +17,11 @@ class App extends Component {
             new Course('CFA', 'MP', '113'),
             new Course('GRS', 'CS', '651'),
         ];
+        console.log(courses);
         return (
             <ol>
                 {
-                    courses.map(course => <li>{course.college} {course.dept} {course.number}</li>)
+                    courses.map(course => <li key={course.key}>{course.college} {course.dept} {course.number}</li>)
                 }
             </ol>
         );
