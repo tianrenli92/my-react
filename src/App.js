@@ -23,44 +23,41 @@ class App extends Component {
             'Professor',
         ];
 
+        this.state = {
+            columns,
+            courses: [],
+            myCourses: [],
+        };
+    }
+
+    getCourses = () => {
         const courses = [
             new Course('CAS', 'CS', '112', 'B1', 'Sullivan'),
             new Course('CAS', 'CS', '332', 'A1', 'Bun'),
             new Course('CAS', 'CS', '350', 'A1', 'Sarkar'),
         ];
-
-        this.state = {
-            columns,
-            courses,
-        };
-        this.addNew = this.addNew.bind(this);
-    }
-
-    addNew() {
-        const course = new Course('CAS', 'CS', '111', 'A1', 'Sullivan');
-        const {courses} = this.state;
-        courses.push(course);
-        this.setState({courses});
-    }
-
-    addNew2 = () => {
-        const course = new Course('CAS', 'CS', '111', 'A1', 'Sullivan');
-        const {courses} = this.state;
-        courses.push(course);
         this.setState({courses});
     };
 
-    delete(key) {
-        let {courses} = this.state;
-        courses = courses.filter((course) => course.key !== key);
-        this.setState({courses});
 
+    addCourse(course) {
+        const {myCourses} = this.state;
+        myCourses.push(course);
+        this.setState({myCourses});
+    }
+
+    deleteCourse(course) {
+        let {myCourses} = this.state;
+        myCourses = myCourses.filter(myCourse => myCourse.key !== course.key);
+        this.setState({myCourses});
     }
 
     render() {
-        const {columns, courses} = this.state;
+        const {columns, courses, myCourses} = this.state;
         return (
             <div className="App">
+                <button onClick={this.getCourses}>Get courses</button>
+                <div>Course List</div>
                 <table>
                     <thead>
                     <tr>
@@ -78,15 +75,38 @@ class App extends Component {
                                 <td>{course.section}</td>
                                 <td>{course.professor}</td>
                                 <td>
-                                    <button onClick={() => this.delete(course.key)}>Delete</button>
+                                    <button onClick={() => this.addCourse(course)}>Add to my courses</button>
                                 </td>
                             </tr>
                         )
                     }
                     </tbody>
                 </table>
-                <button onClick={this.addNew}>Add new course</button>
-                <button onClick={this.addNew2}>Add new course option 2</button>
+                <div>My Courses</div>
+                <table>
+                    <thead>
+                    <tr>
+                        {columns.map(column =>
+                            <th key={column}>{column}</th>)}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        myCourses.map(course =>
+                            <tr key={course.key}>
+                                <td>{course.college}</td>
+                                <td>{course.department}</td>
+                                <td>{course.number}</td>
+                                <td>{course.section}</td>
+                                <td>{course.professor}</td>
+                                <td>
+                                    <button onClick={() => this.deleteCourse(course)}>Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    }
+                    </tbody>
+                </table>
             </div>
         );
     }
